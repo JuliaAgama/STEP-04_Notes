@@ -14,14 +14,16 @@ const client = new MongoClient (dbConfig.url,
         useUnifiedTopology: true }
 );
 
-client.connect ((err, connection) => {
-    if (err) throw err;
-    // if (err) return console.log(err);
+client.connect ((err, database) => {
+// client.connect ((err, connection) => {
+    // if (err) throw err;
+    if (err) return console.log(err);
 
-    require('./app/routes') (
-        app,
-        connection.db(dbConfig.database)
-    );
+    require('./app/routes') (app, database);
+    // require('./app/routes/') (
+    //     app,
+    //     connection.db(dbConfig.database)
+    // );
 
     app.listen(port, () => {
         console.log('We are live on ', port);

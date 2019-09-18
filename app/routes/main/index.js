@@ -6,25 +6,26 @@ const router = express.Router();
 
 
 
-// module.exports = function (app, client) {
+module.exports = function (app, client) {
+    let db = client.db('project_database'); // название базы
 //     let db = client.db('sample-notes-general');
 
 
-//     app.route('/notes')
-//     // .get((req, res) => {
-//     // })
-//     .post((req, res) => {
-//         // создаем заметку:
-//         const note = {title: req.body.title, description: req.body.description, checkList: req.body.checklist}
+    app.route('/')
+    // .get((req, res) => {
+    // })
+    .post((req, res) => {
+        // создаем заметку:
+        const note = {title: req.body.title, description: req.body.description}
 
-//         //отправляем заметку в монгодб:
-//         db.collection('notes').insertOne(note, (err, result) => {
-//             if (err) {
-//                 res.send({ 'error': 'OOOPS... An error has occurred with MongoDB collection "sample-notes-general"' });
-//             } else {
-//                 res.send(result.ops[0]);
-//             }
-//         });
+        //отправляем заметку в монгодб:
+        db.collection('notes').insertOne(note, (err, result) => {
+            if (err) {
+                res.send({ 'error': 'OOOPS... An error has occurred with MongoDB collection "project_database.notes"' });
+            } else {
+                res.send(result.ops[0]);
+            }
+        });
     });
 
 

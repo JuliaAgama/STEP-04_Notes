@@ -1,0 +1,43 @@
+//- app/views/layouts/common.pug
+//- общий шаблон для построения всех страниц
+//- в т.ч. делаем общий хедер для всех страниц, а мейн-секшен будет свой на каждой странице
+//- шаблон будет еще дорабатываться, в т.ч. бутстрапом
+
+doctype html
+html(lang="en")
+
+    head
+
+        link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.8.2/css/all.css", integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay", crossorigin="anonymous")
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css", integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm", crossorigin="anonymous")
+
+        link(rel="stylesheet", href="app/public/css/style.css")
+        //- проверить правильность пути
+
+        block addLinks
+        block title
+            title STEP 4. Notes (Ajax, Bootstrap, Node.js, MongoDB)
+
+    body
+        div(class="content-fluid")
+
+            header(class="header row p-2", id="header")
+                div(class="header-logo col-3 col-md-2 pr-2", id="headerLogo")
+                    img(src="app/public/img/logo_main.png", alt="LOGO")
+                    //- проверить правильность пути
+                div(class="header-text col-9 col-md-10", id="headerText") Keep your memory clean like a child
+
+            section(class="main-section row p-2", id="mainSection")
+
+                block content
+
+
+        script(src="https://code.jquery.com/jquery-3.4.1.min.js", integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=", crossorigin="anonymous")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js", integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q", crossorigin="anonymous")
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js", integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl", crossorigin="anonymous")
+
+        block addScripts
+
+
+
+

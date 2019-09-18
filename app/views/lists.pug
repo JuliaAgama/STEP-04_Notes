@@ -1,0 +1,19 @@
+//- app/views/lists.pug
+//- отображение страницы c заметкой 2-го типа '.../lists'
+    //- TO-DO список: название (опционально), перечень задач с чекбоксом для отметки того, что задача была выполнена
+
+extends layouts/common.pug
+
+block addLinks
+    link(rel="stylesheet", href="app/public/css/lists.css")
+    //- проверить правильность пути
+
+block content
+    h1 THIS IS PAGE FOR list-NOTE
+
+    //- вставлять контент сюда
+
+
+block addScripts
+    script(src="app/public/js/lists/script.js")
+    //- проверить правильность пути

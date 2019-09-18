@@ -1,0 +1,19 @@
+//- app/views/notes.pug
+//- отображение страницы c заметкой 1-го типа '.../notes'
+    //- карточка с названием (опционально) и текстом
+
+extends layouts/common.pug
+
+block addLinks
+    link(rel="stylesheet", href="app/public/css/notes.css")
+    //- проверить правильность пути
+
+block content
+    h1 THIS IS PAGE FOR text-NOTE
+
+    //- вставлять контент сюда
+
+
+block addScripts
+    script(src="app/public/js/notes/script.js")
+    //- проверить правильность пути

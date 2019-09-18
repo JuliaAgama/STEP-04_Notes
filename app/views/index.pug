@@ -1,0 +1,23 @@
+//- app/views/index.pug
+//- отображение главной страницы '/' со всеми заметками
+
+extends layouts/common.pug
+
+block addLinks
+    link(rel="stylesheet", href="app/public/css/main.css")
+    //- проверить правильность пути
+
+block content
+
+    //- вставлять контент сюда
+
+    button(class="btn btn-primary m-5", id="noteButton") Create new note
+    button(class="btn btn-success m-5", id="listButton") Create new list
+
+
+block addScripts
+    script(src="app/public/js/main/rqstCtrl.js")
+    script(src="app/public/js/main/uiCtrl.js")
+    script(src="app/public/js/main/script.js")
+     //- проверить путь и какие файлы подключать
+

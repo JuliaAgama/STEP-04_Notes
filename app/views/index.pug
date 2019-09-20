@@ -4,8 +4,7 @@
 extends layouts/common.pug
 
 block addLinks
-    link(rel="stylesheet", href="./app/public/css/main.css")
-    //- проверить правильность пути
+    link(rel="stylesheet", href="/css/main.css")
 
 block content
 
@@ -19,8 +18,7 @@ block content
 
 
 block addScripts
-    script(src="app/public/js/main/rqstCtrl.js")
-    script(src="app/public/js/main/uiCtrl.js")
-    script(src="app/public/js/main/script.js")
-     //- проверить путь и какие файлы подключать
+    script(src="/js/main/rqstCtrl.js", type='text/javascript')
+    script(src="/js/main/uiCtrl.js", type='text/javascript')
+    script(src="/js/main/script.js", type='text/javascript')
 

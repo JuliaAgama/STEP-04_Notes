@@ -3,3 +3,8 @@
 /*общие для всех страниц*/
 ;
 
+/********** Header styles **********/
+.header-logo {
+    height: 100px;
+    width: 100px;
+}

@@ -4,15 +4,18 @@
 extends layouts/common.pug
 
 block addLinks
-    link(rel="stylesheet", href="app/public/css/main.css")
+    link(rel="stylesheet", href="./app/public/css/main.css")
     //- проверить правильность пути
 
 block content
 
     //- вставлять контент сюда
+    div(class="buttons border bg-light row p-2 justify-content-around", id="buttons")
+        button(class="btn btn-outline-primary col-5 mx-2", id="noteButton") Create new note
+        button(class="btn btn-outline-success col-5 mx-2", id="listButton") Create new list
 
-    button(class="btn btn-primary m-5", id="noteButton") Create new note
-    button(class="btn btn-success m-5", id="listButton") Create new list
+    div(class="content-box border bg-secondary row p-2")
+        include includes/main/contentItem.pug
 
 
 block addScripts

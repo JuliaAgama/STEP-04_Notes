@@ -1,36 +1,39 @@
 // app/routes/main/index.js
 // маршруты к главной странице "/"
 ;
-const express = require('express');
-const router = express.Router();
+// const express = require('express');
+// const router = express.Router();
+// const ObjectID = require('mongodb').ObjectID;
+
+const jsonHandler = require('../../services/jsonHandler');
+const getAllData = require('./getAllData');
 
 
+const dbCollections = require ('../../../config/db').collections;
 
-module.exports = function (app, client) {
-    let db = client.db('project_database'); // название базы
-//     let db = client.db('sample-notes-general');
+module.exports = function (app, database) {
 
+    app.set('view engine', 'pug');
+    app.set('views', './app/views');
 
     app.route('/')
-    // .get((req, res) => {
-    // })
-    .post((req, res) => {
-        // создаем заметку:
-        const note = {title: req.body.title, description: req.body.description}
+    .get((req, res) => {
 
-        //отправляем заметку в монгодб:
-        db.collection('notes').insertOne(note, (err, result) => {
-            if (err) {
-                res.send({ 'error': 'OOOPS... An error has occurred with MongoDB collection "project_database.notes"' });
-            } else {
-                res.send(result.ops[0]);
-            }
+        getAllData(dbCollections, database)
+        .then(items => {
+            console.log(items.length);
+
+            res
+                // .status(200)
+                .render('index')
+                // .send(items);
+                // .end()
+            // res.end()
+        })
+        .catch(err => {
+            res.status(400).send(jsonHandler.createResponse(() => {
+                throw new Error(err);
+            }));
         });
-    });
-
-
-    // app.route('/notes/:id')
-    // .get((req, res) => {
-    //     const details = {'_id: ' /**тут будет id */}
-    // })
+    })
 };

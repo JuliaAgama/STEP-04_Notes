@@ -1,7 +1,7 @@
 // app/routes/main/index.js
 // маршруты к главной странице "/"
 ;
-// const express = require('express');
+const express = require('express');
 // const router = express.Router();
 // const ObjectID = require('mongodb').ObjectID;
 
@@ -12,6 +12,8 @@ const getAllData = require('./getAllData');
 const dbCollections = require ('../../../config/db').collections;
 
 module.exports = function (app, database) {
+
+    app.use(express.static('app/public'))
 
     app.set('view engine', 'pug');
     app.set('views', './app/views');

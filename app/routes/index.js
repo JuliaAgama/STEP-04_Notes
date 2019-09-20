@@ -2,12 +2,14 @@
 // собираем маршруты в одном файле
 ;
 
-const cors = require('cors');
-const bodyParser = require('body-parser');
+// const express        = require('express');
 
-const routes_main = require('./main/');
-const routes_notes = require('./notes/');
-const routes_lists = require('./lists/');
+const cors           = require('cors');
+const bodyParser     = require('body-parser');
+
+const routes_main    = require('./main/');
+const routes_notes   = require('./notes/');
+const routes_lists   = require('./lists/');
 
 module.exports = function (app, database) {
 
@@ -15,6 +17,7 @@ module.exports = function (app, database) {
     // app.use(bodyParser.json())
     // app.use(bodyParser.urlencoded({extended: false}));
     app.use(bodyParser.urlencoded({extended: true}));
+
 
     // app.set('view engine', 'pug');
     // app.set('views', './app/views/');

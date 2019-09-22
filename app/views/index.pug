@@ -4,28 +4,65 @@
 extends layouts/common.pug
 
 block addLinks
-    //- link(rel="stylesheet", href="/css/main.css")
+    link(
+        rel="stylesheet"
+        href="/css/main.css"
+        )
 
 block content
 
     div(class="buttons row mx-0 py-4 justify-content-around")
-        button(class="btn btn-lg btn-outline-primary col-5 col-md-4 col-lg-3 col-xl-2 py-4", id="note-button" onclick="window.location.href='/notes'") Create new note
-        button(class="btn btn-lg btn-outline-warning col-5 col-md-4 col-lg-3 col-xl-2 py-4", id="list-button", onclick="window.location.href='/lists'") Create new list
+        button(
+            class="btn btn-lg btn-outline-primary col-5 col-md-4 col-lg-3 col-xl-2 py-4 text-wrap"
+            id="note-button"
+            style = {'white-space': 'normal'}
+            onclick="window.location.href='/notes'"
+            ) Create new note
+        button(
+            class="btn btn-lg btn-outline-warning col-5 col-md-4 col-lg-3 col-xl-2 py-4 text-wrap"
+            id="list-button"
+            style = {'white-space': 'normal'}
+            onclick="window.location.href='/lists'"
+            ) Create new list
 
     div(class="content-box row mx-0 justify-content-center mb-5")
-
-        //- - let items =[{id: 1, title: 'ONE title.', description: 'this is note description'}, {id: 2, title: 'TWO title.', checklist: ['checklist2: do this first', 'checklist2: do this second']}, {id: 3, description: 'this is THIRD note description'}, {id: 4, checklist: ['Checklist4: do this again first', 'Checklist4: do this again second']},]
 
         ul(class="list-group border col-12 col-md-11 col-lg-10 bg-white py-2 px-1")
             div(class="row mx-0 justify-content-around ")
                 each item in items
                     if !item.title
                         - item.title = ''
+                    else
+                        - item.title = item.title+'. '
                     if item.description
-                        a(class="list-group-item badge-light col-12 col-md-5 col-lg-3 col-xl-2 m-md-3 m-lg-4", href="/notes/"+item._id)= item.title+' '+item.description+'...'
+                        a(
+                            class="list-group-item badge-light col-12 col-md-5 col-lg-3 col-xl-2 m-md-3 m-lg-4 text-uppercase"
+                            href="/notes/"+item._id
+                            )= item.title
+                            span(
+                                class="text-capitalize"
+                                )=item.description.slice(0, 20)+'... '
+                                i(class="fas fa-angle-double-right text-primary")
                     if item.tasks
-                        a(class="list-group-item badge-light col-12 col-md-5 col-lg-3 col-xl-2 m-md-3 m-lg-4", href="/lists/"+item._id)= item.title+' '+item.tasks[0].description+'...'
+                        a(
+                            class="list-group-item badge-light col-12 col-md-5 col-lg-3 col-xl-2 m-md-3 m-lg-4 text-uppercase"
+                            href="/lists/"+item._id
+                            )= item.title
+                            if item.tasks[0].isDone
+                                i(class="far fa-square")
+                                span(
+                                    class="text-capitalize"
+                                    )=' '+item.tasks[0].description.slice(0, 20)+'... '
+                            else
+                                i(class="far fa-check-square")
+                                del(
+                                    class="text-capitalize text-secondary"
+                                    )=' '+item.tasks[0].description+'... '
+                            i(class="fas fa-angle-double-right text-warning")
 
 block addScripts
-    script(src="/js/main/script.js", type='text/javascript')
+    //- script(
+    //-     src="/js/main/script.js"
+    //-     type='text/javascript'
+    //-     )
 

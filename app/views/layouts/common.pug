@@ -21,26 +21,35 @@ html(lang="en")
             title STEP 4. Notes (Ajax, Bootstrap, Node.js, MongoDB)
 
     body
-        header(class="header content-fluid bg-light", id="header")
+        header(
+            class="header content-fluid bg-light"
+            id="header"
+            )
             div(class="row mx-0 p-2 align-items-center")
 
-                a(class="header-logo col-3 col-lg-2 col-xl-1 pr-1", id="header-logo", href="/")
-                    img(class="img-fluid", src="/img/logo_main.png", alt="LOGO")
+                a(
+                    class="header-logo col-3 col-lg-2 col-xl-1 pr-1"
+                    id="header-logo"
+                    href="/"
+                    )
+                    img(
+                        class="img-fluid"
+                        src="/img/logo_main.png"
+                        alt="LOGO"
+                        )
 
-                h1(class="header-text col-9 col-lg-10 col-xl-11 pr-3 text-right display-4 text-primary", id="header-text") Keep&nbspyour&nbspmemo clean&nbsplike&nbspchild
+                h1(
+                    class="header-text col-9 col-lg-10 col-xl-11 pr-3 text-right display-4 text-primary"
+                    id="header-text"
+                    style={'font-size': '8vw'}
+                    ) Keep&nbspyour&nbspmemo clean&nbsplike&nbspa&nbspchild
 
-        section(class="main-section content-fluid bg-light", id="mainSection")
+        section(
+            class="main-section content-fluid bg-light"
+            id="mainSection"
+            )
 
             block content
-
-            //- section(class="main-section bg-light p-2", id="mainSection")
-
-            //-     block content
-
-
-        script(src="https://code.jquery.com/jquery-3.4.1.min.js", integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=", crossorigin="anonymous")
-        script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js", integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q", crossorigin="anonymous")
-        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js", integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl", crossorigin="anonymous")
 
         block addScripts
 

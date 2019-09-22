@@ -13,12 +13,8 @@ block content
         button(class="btn btn-lg btn-outline-warning col-5 col-md-4 col-lg-3 col-xl-2 py-4", id="list-button", onclick="window.location.href='/lists'") Create new list
 
     div(class="content-box row mx-0 justify-content-center mb-5")
-        //- ul(class="list-group border col-12 bg-white py-2 px-1")
-        //-     a(class="list-group-item badge-light", href="/") Do this
-        //-     a(class="list-group-item badge-light", href="/") Do that afther it
-        //-     a(class="list-group-item badge-light", href="/") Some more checklist
 
-        - let items =[{id: 1, title: 'ONE title.', description: 'this is note description'}, {id: 2, title: 'TWO title.', checklist: ['checklist2: do this first', 'checklist2: do this second']}, {id: 3, description: 'this is THIRD note description'}, {id: 4, checklist: ['Checklist4: do this again first', 'Checklist4: do this again second']},]
+        //- - let items =[{id: 1, title: 'ONE title.', description: 'this is note description'}, {id: 2, title: 'TWO title.', checklist: ['checklist2: do this first', 'checklist2: do this second']}, {id: 3, description: 'this is THIRD note description'}, {id: 4, checklist: ['Checklist4: do this again first', 'Checklist4: do this again second']},]
 
         ul(class="list-group border col-12 col-md-11 col-lg-10 bg-white py-2 px-1")
             div(class="row mx-0 justify-content-around ")
@@ -26,9 +22,9 @@ block content
                     if !item.title
                         - item.title = ''
                     if item.description
-                        a(class="list-group-item badge-light col-12 col-md-5 col-lg-3 col-xl-2 m-md-3 m-lg-4", href="/notes/"+item.id)= item.title+' '+item.description+'...'
-                    if item.checklist
-                        a(class="list-group-item badge-light col-12 col-md-5 col-lg-3 col-xl-2 m-md-3 m-lg-4", href="/lists/"+item.id)= item.title+' '+item.checklist[0]+'...'
+                        a(class="list-group-item badge-light col-12 col-md-5 col-lg-3 col-xl-2 m-md-3 m-lg-4", href="/notes/"+item._id)= item.title+' '+item.description+'...'
+                    if item.tasks
+                        a(class="list-group-item badge-light col-12 col-md-5 col-lg-3 col-xl-2 m-md-3 m-lg-4", href="/lists/"+item._id)= item.title+' '+item.tasks[0].description+'...'
 
 block addScripts
     script(src="/js/main/script.js", type='text/javascript')

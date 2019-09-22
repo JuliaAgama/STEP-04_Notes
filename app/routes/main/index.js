@@ -26,11 +26,9 @@ module.exports = function (app, database) {
             console.log(items.length);
 
             res
-                // .status(200)
-                .render('index')
-                // .send(items);
-                // .end()
-            // res.end()
+                .render('index', {
+                    items: items
+                })
         })
         .catch(err => {
             res.status(400).send(jsonHandler.createResponse(() => {

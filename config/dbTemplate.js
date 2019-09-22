@@ -4,7 +4,6 @@
 
 module.exports = {
     url : "mongodb+srv://<user>:<password>@cluster0-uianu.mongodb.net/test?retryWrites=true&w=majority",
-    database: 'project_database',
-    collections: ['notes', 'lists']
+    database: 'project_database'
   };
 

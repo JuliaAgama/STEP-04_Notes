@@ -2,14 +2,9 @@
 // маршруты к главной странице "/"
 ;
 const express = require('express');
-// const router = express.Router();
-// const ObjectID = require('mongodb').ObjectID;
 
 const jsonHandler = require('../../services/jsonHandler');
 const getAllData = require('./getAllData');
-
-
-const dbCollections = require ('../../../config/db').collections;
 
 module.exports = function (app, database) {
 
@@ -20,15 +15,9 @@ module.exports = function (app, database) {
 
     app.route('/')
     .get((req, res) => {
-
-        getAllData(dbCollections, database)
+        getAllData(database)
         .then(items => {
-            console.log(items.length);
-
-            res
-                .render('index', {
-                    items: items
-                })
+            res.render('index', {items: items})
         })
         .catch(err => {
             res.status(400).send(jsonHandler.createResponse(() => {

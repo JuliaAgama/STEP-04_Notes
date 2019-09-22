@@ -3,15 +3,15 @@
 ;
 const collectionHandler = require('../../services/collectionHandler');
 
-module.exports = async function (array, database) {
+module.exports = async function (database) {
     let allNotes = [];
-    for (let el of array) {
-        await (collectionHandler.createResponse(database.collection(el).find()))
-        .then(items => {
-            for (let item of items) {
-                allNotes.push(item);
-            }
-        })
+    let collections = await database.listCollections({}, {nameOnly: true}).toArray();
+    let colNames = collections.map(el => el.name);
+    for (let el of colNames) {
+        let items = await (collectionHandler.createResponse(database.collection(el).find()))
+        for (let item of items) {
+            allNotes.push(item);
+        }
     };
     return allNotes;
 };

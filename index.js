@@ -6,8 +6,6 @@ const MongoClient    = require('mongodb').MongoClient;
 
 const dbUrl          = process.env.MONGODB_URL || require ('./config/db').url;
 const dbName         = process.env.MONGODB_DBNAME || require ('./config/db').database;
-// const dbUrl          = require ('./config/db').url || process.env.MONGODB_URL;
-// const dbName         = require ('./config/db').database || process.env.MONGODB_DBNAME;
 
 const app = express();
 const port = 3000;

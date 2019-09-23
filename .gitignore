@@ -13,3 +13,4 @@ _brief/
 .idea
 /*.env
 /package-lock.json
+package-lock.json

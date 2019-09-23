@@ -10,8 +10,6 @@ const port = config.PORT;
 const dbUrl = config.MONGODB_URL;
 const dbName = config.MONGODB_DBNAME;
 
-console.log(config.MONGODB_URL + config.MONGODB_DBNAME);
-
 const client = new MongoClient (dbUrl, {useNewUrlParser: true, useUnifiedTopology: true });
 
 client.connect ((err, cluster) => {

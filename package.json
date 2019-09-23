@@ -16,14 +16,15 @@
     "chai": "^4.2.0",
     "cors": "^2.8.5",
     "dotenv": "^8.1.0",
-    "express": "^4.17.1",
     "express-session": "^1.16.2",
     "mocha": "^6.2.0",
     "mongodb": "^3.3.2",
     "nodemon": "^1.19.2",
     "pug": "^2.0.4"
   },
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.17.1"
+  },
   "engines": {
     "node": "10.x"
   }

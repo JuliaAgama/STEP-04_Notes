@@ -3,12 +3,14 @@
 ;
 const express        = require('express');
 const MongoClient    = require('mongodb').MongoClient;
-
-const dbUrl          = process.env.MONGODB_URL || require ('./config/db').url;
-const dbName         = process.env.MONGODB_DBNAME || require ('./config/db').database;
+const config         = require('./config')
 
 const app = express();
-const port = 3000;
+const port = config.PORT;
+const dbUrl = config.MONGODB_URL;
+const dbName = config.MONGODB_DBNAME;
+
+console.log(config.MONGODB_URL + config.MONGODB_DBNAME);
 
 const client = new MongoClient (dbUrl, {useNewUrlParser: true, useUnifiedTopology: true });
 

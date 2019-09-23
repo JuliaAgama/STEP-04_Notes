@@ -11,3 +11,4 @@
 _brief/
 .DS_Store
 .idea
+.env

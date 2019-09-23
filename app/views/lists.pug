@@ -5,15 +5,34 @@
 extends layouts/common.pug
 
 block addLinks
-    link(rel="stylesheet", href="app/public/css/lists.css")
+    link(rel="stylesheet", href="/css/lists.css")
     //- проверить правильность пути
 
-block content
-    h1 THIS IS PAGE FOR list-NOTE
 
-    //- вставлять контент сюда
+block content
+
+    div(class="container")
+        form(id="needs-validation" class="d-flex flex-column" novalidate)
+            label(for="Title") Title
+            div(class="input-group mb-3")
+                input(class="form-control form-control-lg" type="text" name="title" placeholder="Enter Note Title")
+            div(class="input-group mb-3")
+                div(class="input-group-prepend")
+                    div(class="input-group-text")
+                        input(type="checkbox" name="isdone" onchange="completeItem(event)")
+                input(type="text" class="form-control" name="description" placeholder="List item" oninput="plusList(event)" required)
+                div(class="input-group-append delete")
+                    span(class="input-group-text")
+                        i(class="far fa-times-circle")
+                div(class="invalid-feedback") Please create at least one list item.
+            small(class="ml-5 form-text text-muted mb-3" id="add-list-item" onclick="addField()" hidden) 
+                i(class="fa fa-plus")       List item
+
+        button(type="button" class="mt-5 btn btn-success" id="create" onclick="createBtnClick()") Create List Note
+                
+            
 
 
 block addScripts
-    script(src="app/public/js/lists/script.js")
+    script(src="/js/lists/script.js")
     //- проверить правильность пути

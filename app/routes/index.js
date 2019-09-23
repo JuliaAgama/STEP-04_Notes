@@ -28,6 +28,6 @@ module.exports = function (app, database) {
     // app.use('/notes', routes_notes.notes(database));
     // app.use('api/notes', routes_notes.api_notes(database));
 
-    // app.use('/lists', routes_lists.lists(database));
-    // app.use('api/lists', routes_lists.api_lists(database));
+    routes_lists.lists(app, database);
+    routes_lists.api_lists(app, database);
 };

@@ -1,21 +1,49 @@
 // app/routes/lists/index.js
 // настройка маршрута к заметке 2го типа:
 // - TO-DO список: название (опционально), перечень задач с чекбоксом для отметки того, что задача была выполнена.
-;
+const express        = require('express');
+const bodyParser     = require('body-parser');
+const assert         = require('assert');
 
 
 
 
-module.exports.lists = function (db){ //
+module.exports.lists = function (app){ //
+    
+    app.use(express.static('app/public'))
 
+    app.set('view engine', 'pug');
+    app.set('views', './app/views');
+
+    app.route('/lists')
+    .get((req, res) => {
+
+        res.render('lists')
+
+        })
+};
     /**
     * Роут GET /lists, который будет отдавать HTML страницу с формой создания списка.
     * Роут GET /lists/${id}, который будет отдавать HTML страницу детального отображения списка.
     */
 
-};
 
-module.exports.api_lists = function (db) {
+module.exports.api_lists = function (app, db) {
+
+    app.use(bodyParser.json())
+    app.route('/api/lists')
+    .post(async (req, res) => {
+
+        try {
+            let r = await db.collection('lists').insertOne(req.body);
+            assert.equal(1, r.insertedCount);
+            res.status(201);
+            res.send('List created');
+        } catch (err) {
+            console.log(err.stack);
+            throw new Error('BROKEN');
+        }
+    })
 
     /**
     * Роут GET /api/lists/${id} отображения заметки со списком.
@@ -25,3 +53,13 @@ module.exports.api_lists = function (db) {
     */
 
 };
+
+
+
+// app/routes/main/index.js
+// маршруты к главной странице "/"
+
+// const router = express.Router();
+// const ObjectID = require('mongodb').ObjectID;
+
+    

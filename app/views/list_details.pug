@@ -1,0 +1,49 @@
+extends layouts/common.pug
+
+block addLinks
+    link(rel="stylesheet", href="/css/lists.css")
+    //- проверить правильность пути
+
+    - const doneTasks = tasksArr.filter(el => el.isdone === true);
+    - const notDone = tasksArr.filter(el => el.isdone === false);
+
+block content
+
+    div(class="container")
+        form(id="needs-validation" class="d-flex flex-column" novalidate)
+            label(for="Title") Title
+            div(class="input-group mb-3")
+                input(class="form-control form-control-lg" type="text" name="title" value= title placeholder="Enter Note Title")
+            
+            each task in notDone
+                div(class="input-group mb-3")
+                    div(class="input-group-prepend")
+                        div(class="input-group-text")
+                            input(type="checkbox" name="isdone" onchange="completeItem(event)")
+                    input(type="text" class="form-control" name="description" placeholder="List item" value= task.description oninput="plusList(event)" required)
+                    div(class="input-group-append delete")
+                        span(class="input-group-text")
+                            i(class="far fa-times-circle")
+                    div(class="invalid-feedback") Please fill or delete the list item.
+            
+            each task in doneTasks
+                div(class="input-group mb-3 order-last")
+                    div(class="input-group-prepend")
+                        div(class="input-group-text")
+                            input(type="checkbox" name="isdone" checked onchange="completeItem(event)")
+                    input(type="text" style="text-decoration-line: line-through" class="form-control" name="description" value= task.description placeholder="List item" oninput="plusList(event)" disabled required)
+                    div(class="input-group-append delete")
+                        span(class="input-group-text")
+                            i(class="far fa-times-circle")
+                    div(class="invalid-feedback") Please fill or delete the list item.
+
+            small(class="ml-5 form-text text-muted mb-3" id="add-list-item" onclick="addField()") 
+                i(class="fa fa-plus")       List item
+
+        button(type="button" class="my-3 btn btn-primary" id="create" onclick="saveBtnClick()") 
+            <i class="fas fa-check"></i>     Save Note
+        button(type="button" class="ml-3 my-3 btn btn-danger" id="create" onclick="deleteBtnClick()")
+            <i class="fas fa-trash-alt"></i>    Delete Note
+
+block addScripts
+    script(src="/js/lists/script.js")

@@ -17,7 +17,7 @@ client.connect ((err, cluster) => {
 
     require('./app/routes') (app, cluster.db(dbName));
 
-    app.listen(port, () => {
+    app.listen(process.env.PORT || port, () => {
         console.log('We are live on ', port);
     });
 });

@@ -27,6 +27,7 @@ module.exports = function (app, database) {
 
     routes_notes.notes(app, database);
     routes_notes.api_notes(app, database);
+    routes_notes.notes_id(app, database);
 
     routes_lists.lists(app, database);
     routes_lists.api_lists(app, database);

@@ -5,15 +5,19 @@
 extends layouts/common.pug
 
 block addLinks
-    link(rel="stylesheet", href="app/public/css/notes.css")
-    //- проверить правильность пути
+
 
 block content
-    h1 THIS IS PAGE FOR text-NOTE
-
-    //- вставлять контент сюда
+    div.container
+        form(method='POST', action='/api/notes', id='noteForm')
+            form-group
+                label Title:
+                input.form-control.mt-3.mb-3(name='title', type='text')
+            form-group
+                label Note:
+                textarea.form-control(name='description', type='text', rows = 8, required)
+            input.btn.btn-success.mt-3.mb-3(type='submit', value='Create Note', id='sbmt-btn')
 
 
 block addScripts
-    script(src="app/public/js/notes/script.js")
-    //- проверить правильность пути
+    script(src="/js/notes/script.js")

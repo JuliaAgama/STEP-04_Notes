@@ -11,10 +11,7 @@
   },
   "author": "Julia Verchyonova",
   "license": "ISC",
-  "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^6.2.0"
-  },
+  "devDependencies": {},
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
@@ -25,6 +22,7 @@
     "pug": "^2.0.4"
   },
   "engines": {
-    "node": "10.x"
+    "node": "10.x",
+    "npm": "6.x"
   }
 }

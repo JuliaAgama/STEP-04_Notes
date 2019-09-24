@@ -12,3 +12,4 @@ _brief/
 .DS_Store
 .idea
 /*.env
+package-lock.json

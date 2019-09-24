@@ -1,3 +1,4 @@
+// app/public/js/lists/script.js
 // "клиентский" скрипт для страницы '.../lists'
 ;
 
@@ -21,20 +22,19 @@ const removeItem = (ev) => {
     ev.target.closest('.input-group').remove();
 }
 
-const taskItem = () => {
+const taskItem = (val, isdone) => {
     const itm = document.createElement('div');
     itm.classList.add('input-group', 'mb-3')
     itm.innerHTML = `
         <div class="input-group-prepend">
             <div class="input-group-text">
-                <input type="checkbox" name="isdone" onchange="completeItem(event)">
+                <input type="checkbox" name="isdone" ${isdone ? isdone : ''} onchange="completeItem(event)">
             </div>
         </div>
-        <input class="form-control" type="text" name="description" placeholder="List item" oninput="plusList(event)" required>
+        <input class="form-control" type="text" name="description" placeholder="List item" value="${val ? val : ""}" oninput="plusList(event)">
         <div class="input-group-append delete" onclick="removeItem(event)">
             <span class="input-group-text"><i class="far fa-times-circle"></i></span>
-        </div>
-        <div class="invalid-feedback>Please fill or delete the list item.</div>`
+        </div>`
 
     return itm;
 }
@@ -58,7 +58,7 @@ const addField = () => {
 }
 
 const createBtnClick = () => {
-    if (form.checkValidity() === true) {
+    if (form.checkValidity() !== false) {
         const tasksArr = [];
         form.elements.description.forEach((el,idx) => {
             tasksArr.push({description: el.value,

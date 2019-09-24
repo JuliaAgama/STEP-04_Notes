@@ -4,23 +4,26 @@
 const express        = require('express');
 const bodyParser     = require('body-parser');
 const assert         = require('assert');
+const ObjectId       = require('mongodb').ObjectID
 
 
 
 
-module.exports.lists = function (app){ //
+module.exports.lists = function (app, db){ //
     
     app.use(express.static('app/public'))
 
     app.set('view engine', 'pug');
     app.set('views', './app/views');
 
-    app.route('/lists')
-    .get((req, res) => {
-
-        res.render('lists')
-
-        })
+    app.route('/lists/:id?')
+    .get(async (req, res) => {
+        if (req.params.id !== undefined) {
+            const obj = await db.collection('lists').findOne(ObjectId(req.params.id));
+            let {title = '', tasks = []} = obj || {};
+            res.render('list_details', {title: title, tasksArr: tasks});
+        } else res.render('lists')
+    })
 };
     /**
     * Роут GET /lists, который будет отдавать HTML страницу с формой создания списка.

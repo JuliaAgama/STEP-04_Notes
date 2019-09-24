@@ -1,4 +1,3 @@
-// app/public/js/lists/script.js
 // "клиентский" скрипт для страницы '.../lists'
 ;
 
@@ -22,19 +21,20 @@ const removeItem = (ev) => {
     ev.target.closest('.input-group').remove();
 }
 
-const taskItem = (val, isdone) => {
+const taskItem = () => {
     const itm = document.createElement('div');
     itm.classList.add('input-group', 'mb-3')
     itm.innerHTML = `
         <div class="input-group-prepend">
             <div class="input-group-text">
-                <input type="checkbox" name="isdone" ${isdone ? isdone : ''} onchange="completeItem(event)">
+                <input type="checkbox" name="isdone" onchange="completeItem(event)">
             </div>
         </div>
-        <input class="form-control" type="text" name="description" placeholder="List item" value="${val ? val : ""}" oninput="plusList(event)">
+        <input class="form-control" type="text" name="description" placeholder="List item" oninput="plusList(event)" required>
         <div class="input-group-append delete" onclick="removeItem(event)">
             <span class="input-group-text"><i class="far fa-times-circle"></i></span>
-        </div>`
+        </div>
+        <div class="invalid-feedback>Please fill or delete the list item.</div>`
 
     return itm;
 }
@@ -58,20 +58,22 @@ const addField = () => {
 }
 
 const createBtnClick = () => {
-    if (form.checkValidity() !== false) {
+    if (form.checkValidity() === true) {
         const tasksArr = [];
-        form.elements.description.forEach((el,idx) => {
-            tasksArr.push({description: el.value,
-                          isdone: form.elements.isdone.item(idx).checked})
-            });
-        tasksArr.sort((a,b) => a.isdone === b.isdone ? 0 : a.isdone? 1 : -1)
+        if (form.elements > 3) {
+            form.elements.description.forEach((el,idx) => {
+                tasksArr.push({description: el.value,
+                            isdone: form.elements.isdone.item(idx).checked})
+                });
+                tasksArr.sort((a,b) => a.isdone === b.isdone ? 0 : a.isdone? 1 : -1)
+            } else {
+                tasksArr.push({description: form.elements.description.value,
+                               isdone: form.elements.isdone.checked})
+        }
 
         let postBody = {};
-    
-        if (form.elements.title.value !== '') {
-            postBody.title = form.elements.title.value;
-            }
-    
+        
+        postBody.title = form.elements.title.value || '';
         postBody.tasks = tasksArr;
         postBody.type = 'list';
         

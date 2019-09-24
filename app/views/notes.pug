@@ -5,19 +5,24 @@
 extends layouts/common.pug
 
 block addLinks
-
+    link(rel="stylesheet", href="app/public/css/notes.css")
+    //- проверить правильность пути
 
 block content
     div.container
         form(method='POST', action='/api/notes', id='noteForm')
-            form-group
+            #form-group
                 label Title:
                 input.form-control.mt-3.mb-3(name='title', type='text')
-            form-group
+            #form-group
                 label Note:
                 textarea.form-control(name='description', type='text', rows = 8, required)
-            input.btn.btn-success.mt-3.mb-3(type='submit', value='Create Note', id='sbmt-btn')
+            input.btn.btn-primary.mt-3.mb-3(type='submit', value='submit', id='sbmt-btn', onclick="window.location.href = 'localhost:3000'")
+            //<input onclick="window.location.href = 'https://website.com/my-account';" type="submit" value="Submit request" />
+
+        //- вставлять контент сюда
 
 
 block addScripts
     script(src="/js/notes/script.js")
+    //- проверить правильность пути

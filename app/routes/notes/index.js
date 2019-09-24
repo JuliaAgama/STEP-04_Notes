@@ -52,7 +52,9 @@ module.exports.notes_id = function (app, database) { //
                 .then(items => {
                     res.render('notes_details', {
                         titleText: items[0].title,
-                        noteText: items[0].description
+                        noteText: items[0].description,
+                        noteId: id
+
                     })
                 })
                 .catch(err => {
@@ -76,5 +78,29 @@ module.exports.api_notes = function (app, db) {
                 res.redirect('/');
             }
         });
+    });
+};
+
+module.exports.api_notes = function (app, db) {
+
+    app.use(bodyParser.json());
+    app.put('/api/notes/:id?', function (req, res) {
+
+        const id = req.params.id;
+        const collection = database.collection('notes');
+        const note = collection.find(new ObjectID(id));
+
+        db.collection.update(note, {
+            title: "ondo",
+            description: "bondo"
+        });
+
+        // db.collection('notes').insertOne(req.body, (err, result) => {
+        //     if (err) {
+        //         res.send({'error': 'An error occured'});
+        //     } else {
+        //         res.redirect('/');
+        //     }
+        // });
     });
 };

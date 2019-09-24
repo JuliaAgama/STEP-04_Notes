@@ -4,11 +4,14 @@
 
 extends layouts/common.pug
 
+
+
 block addLinks
 
 block content
     div.container
-        form(method='POST', action='/api/notes', id='noteForm')
+
+        form(method='POST', action='/api/notes/'+noteId, id='noteForm')
             form-group
                 label Title:
                 input.form-control.mt-3.mb-3(name='title', type='text', value= titleText)

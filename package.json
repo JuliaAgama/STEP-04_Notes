@@ -10,10 +10,7 @@
     "dev": "nodemon index.js"
   },
   "author": "Julia Verchyonova",
-  "license": "ISC",
-  "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^6.2.0"
+  "license": "ISC"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

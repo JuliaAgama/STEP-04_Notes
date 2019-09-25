@@ -64,7 +64,7 @@ module.exports.list_id = function(app, db) {
         try {
             let r = await db.collection('lists').replaceOne({_id: ObjectId(req.params.id)}, {$set: req.body});
             assert.equal(1, r.matchedCount);
-            // assert.equal(1, r.modifiedCount); if nothing is modified r.modifiedCount is 0
+            assert.equal(1, r.modifiedCount);
             res.status(200);
             res.send('List updated');
         } catch (err) {

@@ -8,9 +8,7 @@ block addLinks
 block content
 
     div(class="container")
-
         form(id="needs-validation" class="d-flex flex-column" data-id= id novalidate)
-
             label(for="Title") Title
             div(class="input-group mb-3")
                 input(class="form-control form-control-lg" type="text" name="title" value= title placeholder="Enter Note Title")
@@ -20,10 +18,8 @@ block content
                     div(class="input-group-prepend")
                         div(class="input-group-text")
                             input(type="checkbox" name="isdone" onchange="completeItem(event)")
-                    input(type="text" class="form-control" name="description" placeholder="List item" value= task.description oninput="plusList(event)" required)
-
+                    input(type="text" class="form-control" name="description" placeholder="List item" value= task.description oninput="plusList(event)" onkeydown="enterKey(event)" required)
                     div(class="input-group-append delete" onclick="removeItem(event)")
-
                         span(class="input-group-text")
                             i(class="far fa-times-circle")
                     div(class="invalid-feedback") Please fill or delete the list item.
@@ -33,10 +29,8 @@ block content
                     div(class="input-group-prepend")
                         div(class="input-group-text")
                             input(type="checkbox" name="isdone" checked onchange="completeItem(event)")
-                    input(type="text" style="text-decoration-line: line-through" class="form-control" name="description" value= task.description placeholder="List item" oninput="plusList(event)" disabled required)
-
+                    input(type="text" style="text-decoration-line: line-through" class="form-control" name="description" value= task.description placeholder="List item" oninput="plusList(event)" onkeydown="enterKey(event)" disabled required)
                     div(class="input-group-append delete" onclick="removeItem(event)")
-
                         span(class="input-group-text")
                             i(class="far fa-times-circle")
                     div(class="invalid-feedback") Please fill or delete the list item.

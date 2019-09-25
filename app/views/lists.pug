@@ -20,7 +20,7 @@ block content
                 div(class="input-group-prepend")
                     div(class="input-group-text")
                         input(type="checkbox" name="isdone" onchange="completeItem(event)")
-                input(type="text" class="form-control" name="description" placeholder="List item" oninput="plusList(event)" required)
+                input(type="text" class="form-control" name="description" placeholder="List item" oninput="plusList(event)" onkeydown="enterKey(event)" required)
                 div(class="input-group-append delete")
                     span(class="input-group-text")
                         i(class="far fa-times-circle")

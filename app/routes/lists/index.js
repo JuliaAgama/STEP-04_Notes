@@ -83,6 +83,16 @@ module.exports.list_id = function(app, db) {
             throw new Error('BROKEN');
         }
     })
+    .get(async (req, res) => {
+        try {
+            let r = await db.collection('lists').findOne(ObjectId(req.params.id));
+            res.status(200);
+            res.send(r);
+        } catch (err) {
+            console.log(err.stack);
+            throw new Error('BROKEN');
+        }
+    })
 };
 
 

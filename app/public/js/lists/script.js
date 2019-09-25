@@ -32,7 +32,7 @@ const taskItem = () => {
                 <input type="checkbox" name="isdone" onchange="completeItem(event)">
             </div>
         </div>
-        <input class="form-control" type="text" name="description" placeholder="List item" oninput="plusList(event)" required>
+        <input class="form-control" type="text" name="description" placeholder="List item" oninput="plusList(event)" onkeydown="enterKey(event)" required>
         <div class="input-group-append delete" onclick="removeItem(event)">
             <span class="input-group-text"><i class="far fa-times-circle"></i></span>
         </div>
@@ -56,6 +56,7 @@ const completeItem = (ev) => {
 
 const addField = () => {
     addListItem.before(taskItem());
+    addListItem.previousElementSibling.children.namedItem('description').focus();
     addListItem.hidden = true;
 }
 
@@ -135,3 +136,8 @@ const deleteBtnClick = () => {
         })   
 }
 
+const enterKey = (ev) => {
+    if (event.key === "Enter" && ev.srcElement.textLength > 1) {
+        addField();
+    }
+}

@@ -1,21 +1,18 @@
+//- app/views/lists_details.pug
+//- отображение страницы редактирования заметки 2-го типа '.../lists'
+
 extends layouts/common.pug
 
-block style
-    link(rel="stylesheet", href="../css/style.css")
-
-block addLinks
-
+block content
     - const doneTasks = tasksArr.filter(el => el.isdone === true);
     - const notDone = tasksArr.filter(el => el.isdone === false);
-
-block content
 
     div(class="container")
         form(id="needs-validation" class="d-flex flex-column" data-id= id novalidate)
             label(for="Title") Title
             div(class="input-group mb-3")
                 input(class="form-control form-control-lg" type="text" name="title" value= title placeholder="Enter Note Title")
-            
+
             each task in notDone
                 div(class="input-group mb-3")
                     div(class="input-group-prepend")
@@ -26,7 +23,7 @@ block content
                         span(class="input-group-text")
                             i(class="far fa-times-circle")
                     div(class="invalid-feedback") Please fill or delete the list item.
-            
+
             each task in doneTasks
                 div(class="input-group mb-3 order-last")
                     div(class="input-group-prepend")
@@ -38,13 +35,13 @@ block content
                             i(class="far fa-times-circle")
                     div(class="invalid-feedback") Please fill or delete the list item.
 
-            small(class="ml-5 form-text text-muted mb-3" id="add-list-item" onclick="addField()") 
+            small(class="ml-5 form-text text-muted mb-3" id="add-list-item" onclick="addField()")
                 i(class="fa fa-plus")       List item
 
-        button(type="button" class="my-3 btn btn-primary" id="crBtn" onclick="saveBtnClick()") 
+        button(type="button" class="my-3 btn btn-primary" id="crBtn" onclick="saveBtnClick()")
             <i class="fas fa-check"></i>     Save Note
         button(type="button" class="ml-3 my-3 btn btn-danger" id="delBtn" onclick="deleteBtnClick()")
             <i class="fas fa-trash-alt"></i>    Delete Note
 
 block addScripts
-    script(src="/js/lists/script.js")
+    script(src="/js/lists.js")

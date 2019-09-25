@@ -1,6 +1,7 @@
 // app/public/js/notes/script.js
-// "клиентский" скрипт для страницы '.../notes
+// "клиентский" скрипт для страницы '.../notes/:id?
 ;
+
 const noteForm = document.getElementById('noteForm');
 
 function saveNote() {
@@ -14,11 +15,6 @@ function saveNote() {
             'Content-Type': 'application/json'
         }
     })
-        .then(response => {
-            location = '/'
-            //сюда не заходит
-        })
-
 }
 
 function deleteNote() {
@@ -32,14 +28,8 @@ function deleteNote() {
             'Content-Type': 'application/json'
         }
     })
-        .then(response => {
-            location = '/'
-            //сюда не заходит
-        })
 }
 
-
-//пришлось заходить сюдой
 document.getElementById('save-btn').addEventListener('click', () => {
     if (noteForm.checkValidity() === true) {
         saveNote();
@@ -47,11 +37,7 @@ document.getElementById('save-btn').addEventListener('click', () => {
     }
 });
 
-
 document.getElementById('delete-btn').addEventListener('click', () => {
     deleteNote();
-    location = '/'
+    location = '/';
 });
-
-
-

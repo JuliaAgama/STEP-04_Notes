@@ -16,7 +16,6 @@ const ObjectID = require('mongodb').ObjectID;
 const collectionHandler = require('../../services/collectionHandler');
 
 
-
 // const router = express.Router();
 // const ObjectID = require('mongodb').ObjectID;
 
@@ -83,26 +82,22 @@ module.exports.api_notes = function (app, db) {
     });
 };
 
-// module.exports.api_notes = function (app, db) {
-//
-//     app.use(bodyParser.json());
-//     app.put('/api/notes/:id?', function (req, res) {
-//
-//         const id = req.params.id;
-//         const collection = database.collection('notes');
-//         const note = collection.find(new ObjectID(id));
-//
-//         db.collection.update(note, {
-//             title: "ondo",
-//             description: "bondo"
-//         });
-//
-//         // db.collection('notes').insertOne(req.body, (err, result) => {
-//         //     if (err) {
-//         //         res.send({'error': 'An error occured'});
-//         //     } else {
-//         //         res.redirect('/');
-//         //     }
-//         // });
-//     });
-// };
+//in progress PUT
+module.exports.api_notes_id = function (app, db) {
+
+    app.use(bodyParser.json());
+    app.put('/api/notes/:id?', function (req, res) {
+
+        const id = req.params.id;
+        const collection = database.collection('notes');
+        const note = collection.find(new ObjectID(id));
+
+        db.collection('notes').updateOne(note, {
+            $set: {
+                title: req.body.title,
+                description: req.body.description
+            },
+        });
+        res.redirect('/');
+    });
+};

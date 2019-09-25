@@ -9,16 +9,17 @@ block addLinks
 block content
     div.container
 
-        form(method='POST', action='/api/notes/'+noteId, id='noteForm')
+        form(id='noteForm', data-id = noteId)
 
-            form-group
-                label Title:
-                input.form-control.mt-3.mb-3(name='title', type='text', value= titleText)
-            form-group
-                label Note:
-                textarea.form-control(name='description', type='text', rows = 8, required)= noteText
-            input.btn.btn-success.mt-3.mb-3(type='submit', value='Save Note', id='save-btn')
-            input.btn.btn-danger.mt-3.mb-3.ml-3(type='submit', value='Delete Note', id='delete-btn')
+            input.form-control.mt-3.mb-3(name='title', type='text', value= titleText)
+
+            textarea.form-control(name='description', type='text', rows = 8, required)= noteText
+
+        button.btn.btn-success.mt-3.mb-3(type='submit', value='Save Note', id='save-btn', onclick='saveNote()')
+            <i class="fas fa-check"></i>     Save Note
+
+        button.btn.btn-danger.mt-3.mb-3.ml-3(type='submit', value='Delete Note', id='delete-btn', onclick='deleteNote()')
+            <i class="fas fa-trash-alt"></i>    Delete Note
 
 
 block addScripts

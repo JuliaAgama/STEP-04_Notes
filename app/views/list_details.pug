@@ -1,5 +1,8 @@
 extends layouts/common.pug
 
+block style
+    link(rel="stylesheet", href="../css/style.css")
+
 block addLinks
 
     - const doneTasks = tasksArr.filter(el => el.isdone === true);

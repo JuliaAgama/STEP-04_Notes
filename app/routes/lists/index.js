@@ -20,8 +20,10 @@ module.exports.lists = function (app, db){ //
     .get(async (req, res) => {
         if (req.params.id !== undefined) {
             const obj = await db.collection('lists').findOne(ObjectId(req.params.id));
+
             let {title = '', tasks = [], _id} = obj || {};
             res.render('list_details', {title: title, tasksArr: tasks, id: _id});
+
         } else res.render('lists')
     })
 };

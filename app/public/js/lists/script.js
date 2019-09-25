@@ -86,6 +86,7 @@ const formBody = () => {
 const createBtnClick = () => {
     if (form.checkValidity() === true) {
 
+
         fetch('/api/lists', {
             method: 'POST',
             body: JSON.stringify(formBody()),

@@ -31,4 +31,5 @@ module.exports = function (app, database) {
 
     routes_lists.lists(app, database);
     routes_lists.api_lists(app, database);
+    routes_lists.list_id(app, database);
 };

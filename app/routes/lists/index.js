@@ -20,8 +20,8 @@ module.exports.lists = function (app, db){ //
     .get(async (req, res) => {
         if (req.params.id !== undefined) {
             const obj = await db.collection('lists').findOne(ObjectId(req.params.id));
-            let {title = '', tasks = []} = obj || {};
-            res.render('list_details', {title: title, tasksArr: tasks});
+            let {title = '', tasks = [], _id} = obj || {};
+            res.render('list_details', {title: title, tasksArr: tasks, id: _id});
         } else res.render('lists')
     })
 };
@@ -46,7 +46,7 @@ module.exports.api_lists = function (app, db) {
             console.log(err.stack);
             throw new Error('BROKEN');
         }
-    })
+    });
 
     /**
     * Роут GET /api/lists/${id} отображения заметки со списком.
@@ -57,6 +57,33 @@ module.exports.api_lists = function (app, db) {
 
 };
 
+module.exports.list_id = function(app, db) {
+    app.use(bodyParser.json());
+    app.route('/api/lists/:id')
+    .put(async (req, res) => {
+        try {
+            let r = await db.collection('lists').replaceOne({_id: ObjectId(req.params.id)}, {$set: req.body});
+            assert.equal(1, r.matchedCount);
+            assert.equal(1, r.modifiedCount);
+            res.status(200);
+            res.send('List updated');
+        } catch (err) {
+            console.log(err.stack);
+            throw new Error('BROKEN');
+        }
+    })
+    .delete(async (req, res) => {
+        try {
+            let r = await db.collection('lists').deleteOne({_id: ObjectId(req.params.id)});
+            assert.equal(1, r.deletedCount);
+            res.status(204);
+            res.send('List deleted');
+        } catch (err) {
+            console.log(err.stack);
+            throw new Error('BROKEN');
+        }
+    })
+};
 
 
 // app/routes/main/index.js

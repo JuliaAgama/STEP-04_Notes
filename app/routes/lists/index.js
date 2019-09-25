@@ -25,11 +25,6 @@ module.exports.lists = function (app, db){ //
         } else res.render('lists')
     })
 };
-    /**
-    * Роут GET /lists, который будет отдавать HTML страницу с формой создания списка.
-    * Роут GET /lists/${id}, который будет отдавать HTML страницу детального отображения списка.
-    */
-
 
 module.exports.api_lists = function (app, db) {
 
@@ -47,14 +42,6 @@ module.exports.api_lists = function (app, db) {
             throw new Error('BROKEN');
         }
     });
-
-    /**
-    * Роут GET /api/lists/${id} отображения заметки со списком.
-    * Роут POST /api/lists для добавления нового списка задач с учетом того, что количество позиций в списке - не ограничено и заранее не известно.
-    * Роут PUT /api/lists/${id} для редактирования списка задач.
-    * Роут DELETE /api/lists/${id} для удаления заметки со списком.
-    */
-
 };
 
 module.exports.list_id = function(app, db) {
@@ -85,11 +72,3 @@ module.exports.list_id = function(app, db) {
     })
 };
 
-
-// app/routes/main/index.js
-// маршруты к главной странице "/"
-
-// const router = express.Router();
-// const ObjectID = require('mongodb').ObjectID;
-
-    

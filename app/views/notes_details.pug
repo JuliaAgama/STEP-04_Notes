@@ -1,4 +1,4 @@
-//- app/views/notes.pug
+//- app/views/notes_details.pug
 //- отображение страницы c заметкой 1-го типа '.../notes'
     //- карточка с названием (опционально) и текстом
 
@@ -10,17 +10,12 @@ block content
     div.container
 
         form(id='noteForm', data-id = noteId)
-
             input.form-control.mt-3.mb-3(name='title', type='text', value= titleText)
-
             textarea.form-control(name='description', type='text', rows = 8, required)= noteText
-
-        button.btn.btn-success.mt-3.mb-3(type='submit', value='Save Note', id='save-btn', onclick='saveNote()')
+        button.btn.btn-success.mt-3.mb-3(type='submit', value='Save Note', id='save-btn')
             <i class="fas fa-check"></i>     Save Note
-
-        button.btn.btn-danger.mt-3.mb-3.ml-3(type='submit', value='Delete Note', id='delete-btn', onclick='deleteNote()')
+        button.btn.btn-danger.mt-3.mb-3.ml-3(type='submit', value='Delete Note', id='delete-btn')
             <i class="fas fa-trash-alt"></i>    Delete Note
-
 
 block addScripts
     script(src="/js/notes/script.js")

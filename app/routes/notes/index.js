@@ -9,12 +9,12 @@ const assert = require('assert');
 const path = require('path');
 const mongodb = require('mongodb');
 const ObjectID = require('mongodb').ObjectID;
+
 const jsonHandler = require('../../services/jsonHandler');
 const collectionHandler = require('../../services/collectionHandler');
 
 
 module.exports.notes = function (app, database) { //
-
     app.use(bodyParser.urlencoded({extended: false}));
     app.use(express.static('app/public'));
 
@@ -28,7 +28,6 @@ module.exports.notes = function (app, database) { //
 };
 
 module.exports.notes_id = function (app, database) { //
-
     app.use(bodyParser.urlencoded({extended: false}));
     app.use(express.static('app/public'));
 
@@ -41,8 +40,6 @@ module.exports.notes_id = function (app, database) { //
             const collection = database.collection('notes');
 
             const note = collection.find(new ObjectID(id));
-            // console.log(note);
-            // console.log(note.title);
             collectionHandler.createResponse(note)
                 .then(items => {
                     res.render('notes_details', {
@@ -59,12 +56,9 @@ module.exports.notes_id = function (app, database) { //
         });
 };
 
-
 module.exports.api_notes = function (app, database) {
-
     app.use(bodyParser.json());
     app.post('/api/notes', function (req, res) {
-
         database.collection('notes').insertOne(req.body, (err, result) => {
             if (err) {
                 res.send({'error': 'An error occured'});
@@ -75,9 +69,7 @@ module.exports.api_notes = function (app, database) {
     });
 };
 
-//in progress PUT
 module.exports.api_notes_id = function (app, database) {
-
     app.use(bodyParser.json());
     app.route('/api/notes/:id?')
         .put(async( req, res) => {

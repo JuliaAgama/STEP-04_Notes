@@ -18,7 +18,9 @@ const plusList = (ev) => {
 }
 
 const removeItem = (ev) => {
+    if (form.elements.length > 3) {
     ev.target.closest('.input-group').remove();
+    }
 }
 
 const taskItem = () => {
@@ -57,39 +59,80 @@ const addField = () => {
     addListItem.hidden = true;
 }
 
+const formBody = () => {
+    const tasksArr = [];
+    if (form.elements.length > 3) {
+        form.elements.description.forEach((el,idx) => {
+            tasksArr.push({description: el.value,
+                        isdone: form.elements.isdone.item(idx).checked})
+            });
+            tasksArr.sort((a,b) => a.isdone === b.isdone ? 0 : a.isdone? 1 : -1)
+        } else {
+            tasksArr.push({description: form.elements.description.value,
+                           isdone: form.elements.isdone.checked})
+    }
+
+    let postBody = {};
+    
+    postBody.title = form.elements.title.value || '';
+    postBody.tasks = tasksArr;
+    postBody.type = 'list';
+    
+    return postBody;
+}
+
+
+
 const createBtnClick = () => {
     if (form.checkValidity() === true) {
-        const tasksArr = [];
-        if (form.elements > 3) {
-            form.elements.description.forEach((el,idx) => {
-                tasksArr.push({description: el.value,
-                            isdone: form.elements.isdone.item(idx).checked})
-                });
-                tasksArr.sort((a,b) => a.isdone === b.isdone ? 0 : a.isdone? 1 : -1)
-            } else {
-                tasksArr.push({description: form.elements.description.value,
-                               isdone: form.elements.isdone.checked})
-        }
 
-        let postBody = {};
-        
-        postBody.title = form.elements.title.value || '';
-        postBody.tasks = tasksArr;
-        postBody.type = 'list';
-        
+
         fetch('/api/lists', {
             method: 'POST',
-            body: JSON.stringify(postBody),
+            body: JSON.stringify(formBody()),
             headers: {
                 'Content-Type': 'application/json'
               }
             })
             .then(response => {
-                console.log('Success:', response);
-                location = '/';
+                if (response.ok) {
+                    location = '/'
+                } else throw new Error(response);
             })
             .catch(error => console.error('Error:', error));
         }
-        form.classList.add('was-validated');
 
+    form.classList.add('was-validated');
     };
+
+const saveBtnClick = () => {
+    if (form.checkValidity() === true) {
+        fetch(`/api/lists/${form.dataset.id}`, {
+            method: 'PUT',
+            body: JSON.stringify(formBody()),
+            headers: {
+                'Content-Type': 'application/json'
+              }
+            })
+            .then(response => {
+                if (response.ok) {
+                    location = '/'
+                } else throw new Error(response);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    
+    form.classList.add('was-validated');
+};
+
+const deleteBtnClick = () => {
+    fetch(`/api/lists/${form.dataset.id}`, {
+        method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                location = '/'
+            } else throw new Error(response);
+        })   
+}
+

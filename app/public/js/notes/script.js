@@ -8,14 +8,18 @@ function saveNote () {
     // as HTMLFormElement
     fetch(`/api/notes/${noteForm.dataset.id}`, {
         method: 'PUT',
-        body: new FormData(noteForm),
+        body: JSON.stringify({
+            title: noteForm.elements.title.value,
+            description: noteForm.elements.description.value
+
+        }),
+            // new FormData(noteForm),
         headers: {
             'Content-Type': 'application/json'
         }
     })
         .then(res => {
                 console.log(res);
-
             })
         // .then(response => {
         //     if (response.ok) {

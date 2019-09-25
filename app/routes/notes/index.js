@@ -3,21 +3,14 @@
 // - карточка с названием (опционально) и текстом
 ;
 
-// app/routes/main/index.js
-// маршруты к главной странице "/"
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const assert = require('assert');
 const path = require('path');
 const mongodb = require('mongodb');
 const ObjectID = require('mongodb').ObjectID;
-
+const jsonHandler = require('../../services/jsonHandler');
 const collectionHandler = require('../../services/collectionHandler');
-
-
-// const router = express.Router();
-// const ObjectID = require('mongodb').ObjectID;
 
 
 module.exports.notes = function (app, database) { //
@@ -48,14 +41,14 @@ module.exports.notes_id = function (app, database) { //
             const collection = database.collection('notes');
 
             const note = collection.find(new ObjectID(id));
-
+            // console.log(note);
+            // console.log(note.title);
             collectionHandler.createResponse(note)
                 .then(items => {
                     res.render('notes_details', {
                         titleText: items[0].title,
                         noteText: items[0].description,
                         noteId: id
-
                     })
                 })
                 .catch(err => {
@@ -67,12 +60,12 @@ module.exports.notes_id = function (app, database) { //
 };
 
 
-module.exports.api_notes = function (app, db) {
+module.exports.api_notes = function (app, database) {
 
     app.use(bodyParser.json());
     app.post('/api/notes', function (req, res) {
 
-        db.collection('notes').insertOne(req.body, (err, result) => {
+        database.collection('notes').insertOne(req.body, (err, result) => {
             if (err) {
                 res.send({'error': 'An error occured'});
             } else {
@@ -83,21 +76,18 @@ module.exports.api_notes = function (app, db) {
 };
 
 //in progress PUT
-module.exports.api_notes_id = function (app, db) {
+module.exports.api_notes_id = function (app, database) {
 
     app.use(bodyParser.json());
-    app.put('/api/notes/:id?', function (req, res) {
-
-        const id = req.params.id;
-        const collection = database.collection('notes');
-        const note = collection.find(new ObjectID(id));
-
-        db.collection('notes').updateOne(note, {
-            $set: {
-                title: req.body.title,
-                description: req.body.description
-            },
-        });
-        res.redirect('/');
-    });
+    app.route('/api/notes/:id?')
+        .put(async( req, res) => {
+            const id = req.params.id;
+            const collection = database.collection('notes');
+            const note = await collection.updateOne({_id: ObjectID(id)}, {$set: req.body})
+                .catch(err => {
+                    res.status(400).send(jsonHandler.createResponse(() => {
+                        throw new Error(err);
+                    }));
+                });
+        })
 };

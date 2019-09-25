@@ -82,4 +82,9 @@ module.exports.api_notes_id = function (app, database) {
                     }));
                 });
         })
+        .delete(async (req, res) => {
+            const id = req.params.id;
+            const collection = database.collection('notes');
+            const note = await collection.deleteOne({_id: ObjectID(id)});
+    })
 };

@@ -1,16 +1,7 @@
 //- app/views/lists.pug
 //- отображение страницы c заметкой 2-го типа '.../lists'
-    //- TO-DO список: название (опционально), перечень задач с чекбоксом для отметки того, что задача была выполнена
 
 extends layouts/common.pug
-
-block style
-    link(rel="stylesheet", href="../css/style.css")
-
-block addLinks
-    link(rel="stylesheet", href="/css/lists.css")
-    //- проверить правильность пути
-
 
 block content
 
@@ -28,15 +19,11 @@ block content
                     span(class="input-group-text")
                         i(class="far fa-times-circle")
                 div(class="invalid-feedback") Please create at least one list item.
-            small(class="ml-5 form-text text-muted mb-3" id="add-list-item" onclick="addField()" hidden) 
+            small(class="ml-5 form-text text-muted mb-3" id="add-list-item" onclick="addField()" hidden)
                 i(class="fa fa-plus")       List item
 
-        button(type="button" class="my-3 btn btn-success" id="create" onclick="createBtnClick()") 
+        button(type="button" class="my-3 btn btn-success" id="create" onclick="createBtnClick()")
             <i class="fas fa-plus-circle"></i>      Create Note
-                
-            
-
 
 block addScripts
-    script(src="/js/lists/script.js")
-    //- проверить правильность пути
+    script(src="/js/lists.js")

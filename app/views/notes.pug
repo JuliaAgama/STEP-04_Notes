@@ -1,14 +1,7 @@
 //- app/views/notes.pug
 //- отображение страницы c заметкой 1-го типа '.../notes'
-    //- карточка с названием (опционально) и текстом
 
 extends layouts/common.pug
-
-block style
-    link(rel="stylesheet", href="../css/style.css")
-
-block addLinks
-
 
 block content
     div.container
@@ -22,6 +15,3 @@ block content
             button.btn.btn-success.mt-3.mb-3(type='submit', value='Create Note', id='sbmt-btn')
                 <i class="fas fa-plus-circle"></i>      Create Note
 
-
-block addScripts
-    script(src="/js/notes/script.js")

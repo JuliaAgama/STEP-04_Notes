@@ -1,15 +1,15 @@
 // app/routes/main/index.js
 // маршруты к главной странице "/"
 ;
-const express = require('express');
 
+const express     = require('express');
 const jsonHandler = require('../../services/jsonHandler');
-const getAllData = require('./getAllData');
+const getAllData  = require('./getAllData');
+
 
 module.exports = function (app, database) {
 
     app.use(express.static('app/public'))
-
     app.set('view engine', 'pug');
     app.set('views', './app/views');
 

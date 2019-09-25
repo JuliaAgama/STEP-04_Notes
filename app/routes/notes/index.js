@@ -1,23 +1,18 @@
 // app/routes/notes/index.js
-// настройка маршрута к заметке 1го типа:
-// - карточка с названием (опционально) и текстом
+// настройка маршрута к заметке 1го типа
 ;
 
-const express = require('express');
-const bodyParser = require('body-parser');
-const assert = require('assert');
-const path = require('path');
-const mongodb = require('mongodb');
-const ObjectID = require('mongodb').ObjectID;
-
-const jsonHandler = require('../../services/jsonHandler');
+const express           = require('express');
+const bodyParser        = require('body-parser');
+const ObjectID          = require('mongodb').ObjectID;
+const jsonHandler       = require('../../services/jsonHandler');
 const collectionHandler = require('../../services/collectionHandler');
 
 
-module.exports.notes = function (app, database) { //
+module.exports.notes = function (app, database) {
+
     app.use(bodyParser.urlencoded({extended: false}));
     app.use(express.static('app/public'));
-
     app.set('view engine', 'pug');
     app.set('views', './app/views');
 

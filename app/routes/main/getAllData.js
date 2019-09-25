@@ -1,5 +1,5 @@
 // app/routes/main/getAllNotes.js
-// функция для сбора всех данных из всех коллекций кластера"/"
+// функция для сбора всех данных из всех коллекций базы данных"/"
 ;
 const collectionHandler = require('../../services/collectionHandler');
 

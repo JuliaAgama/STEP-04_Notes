@@ -18,7 +18,7 @@ block content
                     div(class="input-group-prepend")
                         div(class="input-group-text")
                             input(type="checkbox" name="isdone" onchange="completeItem(event)")
-                    input(type="text" class="form-control" name="description" placeholder="List item" value= task.description oninput="plusList(event)" onkeydown="enterKey(event)" required)
+                    input(type="text" class="form-control" name="description" placeholder="List item" value= task.description oninput="plusList(event)" onkeyup="enterKey(event)" required)
                     div(class="input-group-append delete" onclick="removeItem(event)")
                         span(class="input-group-text")
                             i(class="far fa-times-circle")
@@ -29,16 +29,25 @@ block content
                     div(class="input-group-prepend")
                         div(class="input-group-text")
                             input(type="checkbox" name="isdone" checked onchange="completeItem(event)")
-                    input(type="text" style="text-decoration-line: line-through" class="form-control" name="description" value= task.description placeholder="List item" oninput="plusList(event)" onkeydown="enterKey(event)" disabled required)
+                    input(type="text" style="text-decoration-line: line-through" class="form-control" name="description" value= task.description placeholder="List item" oninput="plusList(event)" onkeyup="enterKey(event)" disabled required)
                     div(class="input-group-append delete" onclick="removeItem(event)")
                         span(class="input-group-text")
                             i(class="far fa-times-circle")
                     div(class="invalid-feedback") Please fill or delete the list item.
 
-            small(class="ml-5 form-text text-muted mb-3" id="add-list-item" onclick="addField()")
+            small(class="ml-5 form-text text-muted mb-3" id="add-list-item" style="cursor: pointer" onclick="addField()") 
                 i(class="fa fa-plus")       List item
 
-        button(type="button" class="my-3 btn btn-primary" id="crBtn" onclick="saveBtnClick()")
+        div(class="input-group my-3")
+            div(class="custom-file")
+                input(type="file" class="custom-file-input" id="inpfile" onchange="s3upload(event)")
+                label(class="custom-file-label" for="inpfile") Choose Note Image
+            div(class="input-group-append delete" onclick="removeImg(event)")
+                    span(class="input-group-text")
+                        i(class="far fa-times-circle")
+        img(src= image id="picture" class="w-75 img-thumbnail rounded mx-auto d-block" alt="Note image")
+
+        button(type="button" class="my-3 btn btn-primary" id="create" onclick="saveBtnClick()") 
             <i class="fas fa-check"></i>     Save Note
         button(type="button" class="ml-3 my-3 btn btn-danger" id="delBtn" onclick="deleteBtnClick()")
             <i class="fas fa-trash-alt"></i>    Delete Note

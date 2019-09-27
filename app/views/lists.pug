@@ -13,16 +13,25 @@ block content
             div(class="input-group mb-3")
                 div(class="input-group-prepend")
                     div(class="input-group-text")
-                        input(type="checkbox" name="isdone" onchange="completeItem(event)")
-                input(type="text" class="form-control" name="description" placeholder="List item" oninput="plusList(event)" onkeydown="enterKey(event)" required)
+                        input(type="checkbox" name="isdone" onchange="completeItem(event)" disabled)
+                input(type="text" class="form-control" name="description" placeholder="List item" oninput="plusList(event)" onkeyup="enterKey(event)" required)
                 div(class="input-group-append delete")
                     span(class="input-group-text")
                         i(class="far fa-times-circle")
                 div(class="invalid-feedback") Please create at least one list item.
-            small(class="ml-5 form-text text-muted mb-3" id="add-list-item" onclick="addField()" hidden)
+            small(class="ml-5 form-text text-muted mb-3" id="add-list-item" style="cursor: pointer" onclick="addField()" hidden) 
                 i(class="fa fa-plus")       List item
 
-        button(type="button" class="my-3 btn btn-success" id="create" onclick="createBtnClick()")
+        div(class="input-group my-3")
+            div(class="custom-file")
+                input(type="file" class="custom-file-input" id="inpfile" onchange="s3upload(event)")
+                label(class="custom-file-label" for="inpfile") Choose Note Image
+            div(class="input-group-append delete" onclick="removeImg(event)")
+                    span(class="input-group-text")
+                        i(class="far fa-times-circle")
+        img(src="" id="picture" class="w-75 img-thumbnail rounded mx-auto d-block" alt="Note image")
+
+        button(type="button" class="my-3 btn btn-success" id="create" onclick="createBtnClick()") 
             <i class="fas fa-plus-circle"></i>      Create Note
 
 block addScripts

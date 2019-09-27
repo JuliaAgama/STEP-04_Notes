@@ -3,17 +3,25 @@
 
 let form;
 let addListItem;
+let picture;
+let s3up;
+let fileInp;
+let crBtn;
 
 window.addEventListener('DOMContentLoaded', () => {
     form = document.getElementById('needs-validation');
     addListItem = document.getElementById('add-list-item');
+    picture = document.getElementById('picture');
+    s3up = picture.src;
+    fileInp = document.getElementById('inpfile');
+    crBtn = document.getElementById('create');
 });
 
 const plusList = (ev) => {
     if (ev.target.closest('.input-group').nextElementSibling === addListItem) {
         addListItem.hidden = false;
-    };
-};
+    }; 
+}
 
 const removeItem = (ev) => {
     if (form.elements.length > 3) {
@@ -27,15 +35,15 @@ const taskItem = () => {
     itm.innerHTML = `
         <div class="input-group-prepend">
             <div class="input-group-text">
-                <input type="checkbox" name="isdone" onchange="completeItem(event)">
+                <input type="checkbox" name="isdone" onchange="completeItem(event)" disabled>
             </div>
         </div>
-        <input class="form-control" type="text" name="description" placeholder="List item" oninput="plusList(event)" onkeydown="enterKey(event)" required>
+        <input class="form-control" type="text" name="description" placeholder="List item" oninput="plusList(event)" onkeyup="enterKey(event)" required>
         <div class="input-group-append delete" onclick="removeItem(event)">
             <span class="input-group-text"><i class="far fa-times-circle"></i></span>
         </div>
-        <div class="invalid-feedback>Please fill or delete the list item.</div>
-    `;
+        <div class="invalid-feedback">Please fill or delete the list item.</div>`
+
     return itm;
 };
 
@@ -74,6 +82,7 @@ const formBody = () => {
     postBody.title = form.elements.title.value || '';
     postBody.tasks = tasksArr;
     postBody.type = 'list';
+    postBody.imgurl = s3up;
 
     return postBody;
 };
@@ -134,7 +143,47 @@ const deleteBtnClick = () => {
 };
 
 const enterKey = (ev) => {
-    if (event.key === "Enter" && ev.srcElement.textLength > 1) {
+    const checkbox = ev.target.previousElementSibling.firstElementChild.firstElementChild;
+    if (event.key === "Enter" && ev.target.value.length > 0) {
         addField();
-    }
+    } 
+    
+    if (ev.target.value.length > 0) {
+        checkbox.disabled = false;
+    } else checkbox.disabled = true;
+}
+
+const s3upload = (ev) => {
+    crBtn.disabled = true;
+    const file = fileInp.files[0];
+    fetch(`/sign-s3?file-name=${encodeURIComponent(file.name)}&file-type=${encodeURIComponent(file.type)}`)
+    .then(r => {
+        if (r.ok) {
+        return r.json()
+        }
+    })
+    .then(res => {
+        s3up = encodeURI(res.url);
+        
+        fetch(res.signedRequest, {
+            method: 'PUT',
+            body: file
+            })
+        .then(r => {
+            if (r.ok) {
+                picture.src = s3up;
+                crBtn.disabled = false;
+                fileInp.nextElementSibling.textContent = fileInp.files[0].name;
+            }
+        })
+        .catch(err =>  {
+            console.log('There has been a problem with your fetch operation: ', err.message);
+        })
+    })
 };
+
+const removeImg = (ev) => {
+    picture.src = '';
+    s3up = '';
+    fileInp.nextElementSibling.textContent = '';
+}

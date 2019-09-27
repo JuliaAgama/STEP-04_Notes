@@ -18,7 +18,7 @@ block content
                     div(class="input-group-prepend")
                         div(class="input-group-text")
                             input(type="checkbox" name="isdone" onchange="completeItem(event)")
-                    input(type="text" class="form-control" name="description" placeholder="List item" value= task.description oninput="plusList(event)" onkeydown="enterKey(event)" required)
+                    input(type="text" class="form-control" name="description" placeholder="List item" value= task.description oninput="plusList(event)" onkeyup="enterKey(event)" required)
                     div(class="input-group-append delete" onclick="removeItem(event)")
                         span(class="input-group-text")
                             i(class="far fa-times-circle")
@@ -29,13 +29,13 @@ block content
                     div(class="input-group-prepend")
                         div(class="input-group-text")
                             input(type="checkbox" name="isdone" checked onchange="completeItem(event)")
-                    input(type="text" style="text-decoration-line: line-through" class="form-control" name="description" value= task.description placeholder="List item" oninput="plusList(event)" onkeydown="enterKey(event)" disabled required)
+                    input(type="text" style="text-decoration-line: line-through" class="form-control" name="description" value= task.description placeholder="List item" oninput="plusList(event)" onkeyup="enterKey(event)" disabled required)
                     div(class="input-group-append delete" onclick="removeItem(event)")
                         span(class="input-group-text")
                             i(class="far fa-times-circle")
                     div(class="invalid-feedback") Please fill or delete the list item.
 
-            small(class="ml-5 form-text text-muted mb-3" id="add-list-item" onclick="addField()")
+            small(class="ml-5 form-text text-muted mb-3" id="add-list-item" style="cursor: pointer" onclick="addField()") 
                 i(class="fa fa-plus")       List item
 
         button(type="button" class="my-3 btn btn-primary" id="crBtn" onclick="saveBtnClick()")

@@ -27,15 +27,15 @@ const taskItem = () => {
     itm.innerHTML = `
         <div class="input-group-prepend">
             <div class="input-group-text">
-                <input type="checkbox" name="isdone" onchange="completeItem(event)">
+                <input type="checkbox" name="isdone" onchange="completeItem(event)" disabled>
             </div>
         </div>
-        <input class="form-control" type="text" name="description" placeholder="List item" oninput="plusList(event)" onkeydown="enterKey(event)" required>
+        <input class="form-control" type="text" name="description" placeholder="List item" oninput="plusList(event)" onkeyup="enterKey(event)" required>
         <div class="input-group-append delete" onclick="removeItem(event)">
             <span class="input-group-text"><i class="far fa-times-circle"></i></span>
         </div>
-        <div class="invalid-feedback>Please fill or delete the list item.</div>
-    `;
+        <div class="invalid-feedback">Please fill or delete the list item.</div>`
+
     return itm;
 };
 
@@ -134,7 +134,12 @@ const deleteBtnClick = () => {
 };
 
 const enterKey = (ev) => {
-    if (event.key === "Enter" && ev.srcElement.textLength > 1) {
+    const checkbox = ev.target.previousElementSibling.firstElementChild.firstElementChild;
+    if (event.key === "Enter" && ev.target.textLength > 0) {
         addField();
-    }
-};
+    } 
+    
+    if (ev.target.textLength > 0) {
+        checkbox.disabled = false;
+    } else checkbox.disabled = true;
+}

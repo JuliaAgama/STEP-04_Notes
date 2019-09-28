@@ -7,7 +7,6 @@ const bodyParser     = require('body-parser');
 const assert         = require('assert');
 const ObjectId       = require('mongodb').ObjectID;
 
-
 module.exports.lists = function (app, db){
 
     app.use(express.static('app/public'));
@@ -18,12 +17,15 @@ module.exports.lists = function (app, db){
     app.route('/lists/:id?')
     .get(async (req, res) => {
         if (req.params.id !== undefined) {
+            try {
             const obj = await db.collection('lists').findOne(ObjectId(req.params.id));
             let {title = '', tasks = [], _id} = obj || {};
-            res.render('list_details', {title: title, tasksArr: tasks, id: _id});
-        } else {
-            res.render('lists');
-        }
+            res.render('list_details', {title: title, tasksArr: tasks, id: _id})
+            } catch (err) {
+                console.log(err.stack);
+                throw new Error('BROKEN');
+            }
+        } else res.render('lists')
     })
 };
 

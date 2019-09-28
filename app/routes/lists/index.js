@@ -5,7 +5,7 @@
 const express        = require('express');
 const bodyParser     = require('body-parser');
 const assert         = require('assert');
-const ObjectId       = require('mongodb').ObjectID;
+const ObjectId       = require('mongodb').ObjectID
 
 module.exports.lists = function (app, db){
 
@@ -19,8 +19,8 @@ module.exports.lists = function (app, db){
         if (req.params.id !== undefined) {
             try {
             const obj = await db.collection('lists').findOne(ObjectId(req.params.id));
-            let {title = '', tasks = [], _id} = obj || {};
-            res.render('list_details', {title: title, tasksArr: tasks, id: _id})
+            let {title = '', tasks = [], imgurl = '', _id} = obj || {};
+            res.render('list_details', {title: title, tasksArr: tasks, image: imgurl, id: _id})
             } catch (err) {
                 console.log(err.stack);
                 throw new Error('BROKEN');
@@ -86,3 +86,9 @@ module.exports.list_id = function(app, db) {
     })
 };
 
+
+// app/routes/main/index.js
+// маршруты к главной странице "/"
+
+// const router = express.Router();
+// const ObjectID = require('mongodb').ObjectID;

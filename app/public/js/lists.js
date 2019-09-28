@@ -3,17 +3,25 @@
 
 let form;
 let addListItem;
+let picture;
+let s3up;
+let fileInp;
+let crBtn;
 
 window.addEventListener('DOMContentLoaded', () => {
     form = document.getElementById('needs-validation');
     addListItem = document.getElementById('add-list-item');
+    picture = document.getElementById('picture');
+    s3up = picture.src;
+    fileInp = document.getElementById('inpfile');
+    crBtn = document.getElementById('create');
 });
 
 const plusList = (ev) => {
     if (ev.target.closest('.input-group').nextElementSibling === addListItem) {
         addListItem.hidden = false;
-    };
-};
+    }; 
+}
 
 const removeItem = (ev) => {
     if (form.elements.length > 3) {
@@ -74,6 +82,7 @@ const formBody = () => {
     postBody.title = form.elements.title.value || '';
     postBody.tasks = tasksArr;
     postBody.type = 'list';
+    postBody.imgurl = s3up;
 
     return postBody;
 };
@@ -135,11 +144,47 @@ const deleteBtnClick = () => {
 
 const enterKey = (ev) => {
     const checkbox = ev.target.previousElementSibling.firstElementChild.firstElementChild;
-    if (event.key === "Enter" && ev.target.textLength > 0) {
+
+    if (event.key === "Enter" && ev.target.value.length > 0) {
         addField();
     } 
     
-    if (ev.target.textLength > 0) {
+    if (ev.target.value.length > 0) {
         checkbox.disabled = false;
     } else checkbox.disabled = true;
+}
+
+const s3upload = (ev) => {
+    crBtn.disabled = true;
+    const file = fileInp.files[0];
+    fetch(`/sign-s3?file-name=${encodeURIComponent(file.name)}&file-type=${encodeURIComponent(file.type)}`)
+    .then(r => {
+        if (r.ok) {
+        return r.json()
+        }
+    })
+    .then(res => {
+        s3up = encodeURI(res.url);
+        
+        fetch(res.signedRequest, {
+            method: 'PUT',
+            body: file
+            })
+        .then(r => {
+            if (r.ok) {
+                picture.src = s3up;
+                crBtn.disabled = false;
+                fileInp.nextElementSibling.textContent = fileInp.files[0].name;
+            }
+        })
+        .catch(err =>  {
+            console.log('There has been a problem with your fetch operation: ', err.message);
+        })
+    })
+};
+
+const removeImg = (ev) => {
+    picture.src = '';
+    s3up = '';
+    fileInp.nextElementSibling.textContent = '';
 }

@@ -38,7 +38,16 @@ block content
             small(class="ml-5 form-text text-muted mb-3" id="add-list-item" style="cursor: pointer" onclick="addField()") 
                 i(class="fa fa-plus")       List item
 
-        button(type="button" class="my-3 btn btn-primary" id="crBtn" onclick="saveBtnClick()")
+        div(class="input-group my-3")
+            div(class="custom-file")
+                input(type="file" class="custom-file-input" id="inpfile" onchange="s3upload(event)")
+                label(class="custom-file-label" for="inpfile") Choose Note Image
+            div(class="input-group-append delete" onclick="removeImg(event)")
+                    span(class="input-group-text")
+                        i(class="far fa-times-circle")
+        img(src= image id="picture" class="w-75 img-thumbnail rounded mx-auto d-block" alt="Note image")
+
+        button(type="button" class="my-3 btn btn-primary" id="create" onclick="saveBtnClick()") 
             <i class="fas fa-check"></i>     Save Note
         button(type="button" class="ml-3 my-3 btn btn-danger" id="delBtn" onclick="deleteBtnClick()")
             <i class="fas fa-trash-alt"></i>    Delete Note

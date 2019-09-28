@@ -16,7 +16,9 @@ module.exports = function (app, database) {
 
 
 
-    routes_main(app, database);
+    routes_main.main(app, database);
+
+    routes_main.s3_pict(app);
 
     routes_notes.notes(app, database);
     routes_notes.api_notes(app, database);

@@ -7,7 +7,6 @@ const bodyParser     = require('body-parser');
 const assert         = require('assert');
 const ObjectId       = require('mongodb').ObjectID
 
-
 module.exports.lists = function (app, db){
 
     app.use(express.static('app/public'));

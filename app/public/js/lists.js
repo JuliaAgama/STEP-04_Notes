@@ -144,6 +144,7 @@ const deleteBtnClick = () => {
 
 const enterKey = (ev) => {
     const checkbox = ev.target.previousElementSibling.firstElementChild.firstElementChild;
+
     if (event.key === "Enter" && ev.target.value.length > 0) {
         addField();
     } 

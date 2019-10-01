@@ -30,28 +30,28 @@ block content
                         - item.title = item.title+'. '
                     if item.description
                         a(
-                            class="list-group-item badge-light col-12 col-md-5 col-lg-3 col-xl-2 m-md-1  text-uppercase"
+                            class="list-group-item badge-light col-12 col-md-5 col-lg-3 col-xl-2 m-md-1"
                             href="/notes/"+item._id
-                            )= item.title
-                            span(
-                                class="text-capitalize"
-                                )=item.description.slice(0, 20)+'... '
-                                i(class="fas fa-angle-double-right text-primary")
+                        )
+                            span(class="text-uppercase")= item.title
+                            span(class="text-capitalize")=item.description.slice(0, 20)+'... '
+                            i(class="fas fa-angle-double-right text-primary float-right")
                     if item.tasks
                         a(
-                            class="list-group-item badge-light col-12 col-md-5 col-lg-3 col-xl-2 m-md-1  text-uppercase"
+                            class="list-group-item badge-light col-12 col-md-5 col-lg-3 col-xl-2 m-md-1"
                             href="/lists/"+item._id
-                            )= item.title
-                            if !item.tasks[0].isdone
-                                i(class="far fa-square")
-                                span(
-                                    class="text-capitalize"
-                                    )=' '+item.tasks[0].description.slice(0, 20)+'... '
-                            else
-                                i(class="far fa-check-square")
-                                del(
-                                    class="text-capitalize text-secondary"
-                                    )=' '+item.tasks[0].description+'... '
-                            i(class="fas fa-angle-double-right text-warning")
+                        )
+                            div(class="row")
+                                p(class="text-uppercase col")= item.title + ' '
+                                    if !item.tasks[0].isdone
+                                        i(class="far fa-square")
+                                        span(class="text-capitalize")=' '+item.tasks[0].description.slice(0, 20)+'... '
+                                    else
+                                        i(class="far fa-check-square")
+                                        del(class="text-capitalize text-secondary")=' '+item.tasks[0].description+'... '
+                                if item.imgurl !=='http://localhost:5000/lists'
+                                    div(class="col-2 col-md-5 col-lg-10")
+                                        img(src=item.imgurl, class="img-fluid rounded", alt="PIC")
+                                i(class="fas fa-angle-double-right text-warning float-right")
 
 

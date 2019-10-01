@@ -2,7 +2,6 @@
 // настройка маршрута к заметке 1го типа
 ;
 
-const express           = require('express');
 const bodyParser        = require('body-parser');
 const ObjectID          = require('mongodb').ObjectID;
 const jsonHandler       = require('../../services/jsonHandler');
@@ -11,23 +10,13 @@ const collectionHandler = require('../../services/collectionHandler');
 
 module.exports.notes = function (app, database) {
 
-    app.use(bodyParser.urlencoded({extended: false}));
-    app.use(express.static('app/public'));
-    app.set('view engine', 'pug');
-    app.set('views', './app/views');
-
     app.route('/notes')
         .get((req, res) => {
             res.render('notes')
         });
 };
 
-module.exports.notes_id = function (app, database) { //
-    app.use(bodyParser.urlencoded({extended: false}));
-    app.use(express.static('app/public'));
-
-    app.set('view engine', 'pug');
-    app.set('views', './app/views');
+module.exports.notes_id = function (app, database) {
 
     app.route('/notes/:id?')
         .get((req, res) => {
@@ -52,7 +41,7 @@ module.exports.notes_id = function (app, database) { //
 };
 
 module.exports.api_notes = function (app, database) {
-    app.use(bodyParser.json());
+
     app.post('/api/notes', function (req, res) {
         database.collection('notes').insertOne(req.body, (err, result) => {
             if (err) {
@@ -66,6 +55,7 @@ module.exports.api_notes = function (app, database) {
 
 module.exports.api_notes_id = function (app, database) {
     app.use(bodyParser.json());
+
     app.route('/api/notes/:id?')
         .put(async( req, res) => {
             const id = req.params.id;

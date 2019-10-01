@@ -19,7 +19,7 @@ block content
                     span(class="input-group-text")
                         i(class="far fa-times-circle")
                 div(class="invalid-feedback") Please create at least one list item.
-            small(class="ml-5 form-text text-muted mb-3" id="add-list-item" style="cursor: pointer" onclick="addField()" hidden) 
+            small(class="ml-5 form-text text-muted mb-3" id="add-list-item" style="cursor: pointer" onclick="addField()" hidden)
                 i(class="fa fa-plus")       List item
 
         div(class="input-group my-3")
@@ -29,9 +29,9 @@ block content
             div(class="input-group-append delete" onclick="removeImg(event)")
                     span(class="input-group-text")
                         i(class="far fa-times-circle")
-        img(src="" id="picture" class="w-75 img-thumbnail rounded mx-auto d-block" alt="Note image")
+        img(src="" id="picture" class="w-75 img-thumbnail rounded mx-auto d-none" alt="Note image")
 
-        button(type="button" class="my-3 btn btn-success" id="create" onclick="createBtnClick()") 
+        button(type="button" class="my-3 btn btn-success d-block" id="create" onclick="createBtnClick()")
             <i class="fas fa-plus-circle"></i>      Create Note
 
 block addScripts

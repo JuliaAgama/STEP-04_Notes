@@ -2,7 +2,6 @@
 // маршруты к главной странице "/"
 ;
 
-const express     = require('express');
 const jsonHandler = require('../../services/jsonHandler');
 const getAllData  = require('./getAllData');
 const aws         = require('aws-sdk');
@@ -10,10 +9,6 @@ const config      = require('../../../config')
 
 
 module.exports.main = function (app, database) {
-
-    app.use(express.static('app/public'))
-    app.set('view engine', 'pug');
-    app.set('views', './app/views');
 
     app.route('/')
     .get((req, res) => {
@@ -30,29 +25,30 @@ module.exports.main = function (app, database) {
 };
 
 module.exports.s3_pict = function(app) {
+
     app.get('/sign-s3', (req, res) => {
         const s3 = new aws.S3({accessKeyId: config.accessKeyId, secretAccessKey: config.secretAccessKey, region: config.region});
         const fileName = req.query['file-name'];
         const fileType = req.query['file-type'];
         const s3Params = {
-          Bucket: config.s3bucket,
-          Key: fileName,
-          Expires: 60,
-          ContentType: fileType,
-          ACL: 'public-read'
+            Bucket: config.s3bucket,
+            Key: fileName,
+            Expires: 60,
+            ContentType: fileType,
+            ACL: 'public-read'
         };
-      
+
         s3.getSignedUrl('putObject', s3Params, (err, data) => {
-          if(err){
-            console.log(err);
-            return res.end();
-          }
-          const returnData = {
-            signedRequest: data,
-            url: `https://${config.s3bucket}.s3.amazonaws.com/${fileName}`
-          };
-          res.write(JSON.stringify(returnData));
-          res.end();
+            if(err){
+                console.log(err);
+                return res.end();
+            }
+            const returnData = {
+                signedRequest: data,
+                url: `https://${config.s3bucket}.s3.amazonaws.com/${fileName}`
+            };
+            res.write(JSON.stringify(returnData));
+            res.end();
         });
-      });
+    });
 }

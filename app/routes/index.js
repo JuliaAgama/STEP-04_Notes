@@ -2,6 +2,7 @@
 // собираем маршруты в одном файле
 ;
 
+const express        = require('express');
 const cors           = require('cors');
 const bodyParser     = require('body-parser');
 
@@ -14,7 +15,9 @@ module.exports = function (app, database) {
     app.use(cors());
     app.use(bodyParser.urlencoded({extended: true}));
 
-
+    app.use(express.static('app/public'))
+    app.set('view engine', 'pug');
+    app.set('views', './app/views');
 
     routes_main.main(app, database);
 

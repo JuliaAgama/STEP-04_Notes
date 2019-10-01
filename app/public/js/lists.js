@@ -172,6 +172,7 @@ const s3upload = (ev) => {
             })
         .then(r => {
             if (r.ok) {
+                picture.classList.remove("d-none");
                 picture.src = s3up;
                 crBtn.disabled = false;
                 fileInp.nextElementSibling.textContent = fileInp.files[0].name;

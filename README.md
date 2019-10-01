@@ -53,7 +53,8 @@ Olexandr Shaporda:
   - GET /api/notes/${id};
   - POST /api/notes;
   - PUT /api/notes/${id};
-  - DELETE /api/notes/${id}.
+  - DELETE /api/notes/${id};
+  - routes for image uploads.
 
 
 Web Preview link: https://step-04-notes.herokuapp.com/

@@ -2,25 +2,22 @@
 // настройка маршрута к заметке 2го типа:
 ;
 
-const express        = require('express');
 const bodyParser     = require('body-parser');
 const assert         = require('assert');
 const ObjectId       = require('mongodb').ObjectID
 
 module.exports.lists = function (app, db){
 
-    app.use(express.static('app/public'));
-
-    app.set('view engine', 'pug');
-    app.set('views', './app/views');
-
     app.route('/lists/:id?')
     .get(async (req, res) => {
         if (req.params.id !== undefined) {
             try {
             const obj = await db.collection('lists').findOne(ObjectId(req.params.id));
-            let {title = '', tasks = [], imgurl = '', _id} = obj || {};
-            res.render('list_details', {title: title, tasksArr: tasks, image: imgurl, id: _id})
+            
+            let {title = '', tasks = [], imgurl, _id} = obj || {};
+            let imgClass = (imgurl && imgurl !== 'http://localhost:5000/lists') ? "w-75 img-thumbnail rounded mx-auto d-block" : "d-none";
+
+            res.render('list_details', {title: title, tasksArr: tasks, imageUrl: imgurl, imageClass: imgClass, id: _id})
             } catch (err) {
                 console.log(err.stack);
                 throw new Error('BROKEN');
@@ -30,7 +27,6 @@ module.exports.lists = function (app, db){
 };
 
 module.exports.api_lists = function (app, db) {
-
     app.use(bodyParser.json());
 
     app.route('/api/lists')
@@ -48,7 +44,6 @@ module.exports.api_lists = function (app, db) {
 };
 
 module.exports.list_id = function(app, db) {
-
     app.use(bodyParser.json());
 
     app.route('/api/lists/:id')
@@ -85,10 +80,3 @@ module.exports.list_id = function(app, db) {
         }
     })
 };
-
-
-// app/routes/main/index.js
-// маршруты к главной странице "/"
-
-// const router = express.Router();
-// const ObjectID = require('mongodb').ObjectID;

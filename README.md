@@ -39,7 +39,8 @@ Olexandr Savchenko:
   - GET /api/lists/${id};
   - POST /api/lists;
   - PUT /api/lists/${id};
-  - DELETE /api/lists/${id}.
+  - DELETE /api/lists/${id};
+  - routes for image uploads.
   
 
 Olexandr Shaporda:
@@ -53,8 +54,7 @@ Olexandr Shaporda:
   - GET /api/notes/${id};
   - POST /api/notes;
   - PUT /api/notes/${id};
-  - DELETE /api/notes/${id};
-  - routes for image uploads.
+  - DELETE /api/notes/${id}.
 
 
 Web Preview link: https://step-04-notes.herokuapp.com/

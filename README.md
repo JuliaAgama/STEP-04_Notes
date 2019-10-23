@@ -8,6 +8,7 @@ Technology Stack:
 - JS: Ajax - fetch, async;
 - Node.js. Modules: Express, Router, Pug, MongoDB, Body-parser, Cors, Nodemon, Dotenv; 
 - Database MongoDB: mlab/MongoDB Cloud;
+- Cloud storage: Amazon S3;
 - Deployment: Heroku server.
 
 
